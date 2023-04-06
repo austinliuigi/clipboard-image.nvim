@@ -124,8 +124,9 @@ M.insert_txt = function(affix, path_txt)
   local txt_topaste = string.format(affix, path_txt)
 
   ---Convert txt_topaste to lines table so it can handle multiline string
+  -- See https://stackoverflow.com/questions/19907916/split-a-string-using-string-gmatch-in-lua
   local lines = {}
-  for line in txt_topaste:gmatch "[^\r\n]+" do
+  for line in (txt_topaste .. "\n"):gmatch "([^\r\n]*)[\r\n]" do
     table.insert(lines, line)
   end
 
